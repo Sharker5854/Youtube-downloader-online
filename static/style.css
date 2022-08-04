@@ -1,0 +1,20 @@
+body {
+    background-color: #404448 !important;
+}
+
+.main {
+    padding: 5% 0 5% 0;
+}
+
+.inputs-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#link-input {
+    width: 60%;
+    margin-right: 0.5%;
+}
+#submit-input {
+    margin-left: 0.5%;
+}
