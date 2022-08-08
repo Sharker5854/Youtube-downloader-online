@@ -6,6 +6,7 @@ window.onload = function() {
     }
 
     let url_input = document.querySelector("#url-input")
+    let submit_input = document.querySelector("#submit-input")
     let found_video_block = document.querySelector(".found-video-data")
     let found_video_title = document.querySelector("#video-title")
     let found_video_thumbnail = document.querySelector("#video-thumbnail")
@@ -34,6 +35,7 @@ window.onload = function() {
                             found_video_thumbnail.removeAttribute("src")
                             found_video_block.style.display = "block"
                         });
+                        submit_input.disabled = true
                     }
                     else {
                         found_video_block.style.display = "none"
@@ -41,18 +43,23 @@ window.onload = function() {
                             found_video_title.innerHTML = response["video_title"]
                             found_video_thumbnail.src = response["thumbnail_url"]
                             found_video_block.style.display = "block"
-                        });  
+                        });
+                        submit_input.removeAttribute("disabled")
                     }
                 },
                 error: function(error) {
                     found_video_title.style.color = "#FF0000"
                     found_video_title.innerHTML = "Ошибка. Что-то пошло не так :("
                     found_video_thumbnail.removeAttribute("src")
+                    submit_input.disabled = true
                 }
             });
         }
         else {
             found_video_title.innerHTML = ""
+            found_video_thumbnail.removeAttribute("src")
+            submit_input.disabled = true
+            localStorage.setItem("current-form-value", JSON.stringify(""))
         }
     });
 
