@@ -24,7 +24,7 @@
 
         <div class="main">
             <div class="form-area">
-                <form action="{{ url_for('install_video') }}" method="POST">
+                <!-- <form action="{{ install_video_url }}" method="POST" id="yt-form"> --> <!-- without 'action' attr cause we'll call ajax-query when submit form -->
                     <div class="inputs-area">
                         <input type="text" class="form-control" id="url-input" placeholder="Ссылка на видео...">
                         <input type="submit" class="btn btn-success" id="submit-input" value="Скачать" disabled>
@@ -41,6 +41,7 @@
 
         <script>
             const get_video_metadata_url = '{{ get_video_metadata_url }}';
+            const install_video_url = "{{ install_video_url }}"
         </script>
     </body>
 
