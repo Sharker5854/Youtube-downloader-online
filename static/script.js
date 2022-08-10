@@ -1,10 +1,12 @@
 window.onload = function() {
 
+    const logo = document.querySelector("#logo")
     const url_input = document.querySelector("#url-input")
     const submit_input = document.querySelector("#submit-input")
     const found_video_block = document.querySelector(".found-video-data")
     const found_video_title = document.querySelector("#video-title")
     const found_video_thumbnail = document.querySelector("#video-thumbnail")
+    const spinner_block = document.querySelector(".spinner-area")
     let last_found_video_title = NaN
 
 
@@ -12,9 +14,16 @@ window.onload = function() {
         return new Promise(resolve => setTimeout(resolve, ms));
     };
 
-    // function show_install_process_spinner() {
-        
-    // };
+    function show_hide__install_process_spinner(option) {
+        if (option == "show") {
+            spinner_block.style.display = "block";
+            found_video_block.style.display = "none";
+        }
+        else {
+            spinner_block.style.display = "none";
+            found_video_block.style.display = "block";
+        }
+    };
 
     function get_video_metadata_by_ajax() {
         if (url_input.value != "") {
@@ -70,7 +79,7 @@ window.onload = function() {
     };
 
     function install_video_by_ajax() {
-        console.log("Кручу спиннер!")
+        show_hide__install_process_spinner("show");
         $.ajax({
             url: install_video_url,
             type: "POST",
@@ -84,12 +93,14 @@ window.onload = function() {
                 "video_url" : url_input.value
             }),
             success: function(blob_obj, status, xhr) {
+                show_hide__install_process_spinner("hide");
                 var link = document.createElement("a")
                 link.href = window.URL.createObjectURL(blob_obj)
                 link.download = last_found_video_title + "_YouTubeInstaller.mp4"
                 link.click()
             },
             error: function(error) {
+                show_hide__install_process_spinner("hide");
                 found_video_block.style.display = "none"
                 found_video_thumbnail.removeAttribute("src")
                 sleep(30).then(() => {
@@ -112,5 +123,10 @@ window.onload = function() {
 
     url_input.addEventListener("input", get_video_metadata_by_ajax);
     $("#submit-input").on("click", install_video_by_ajax);
+    
+    logo.addEventListener("click", function() {
+        localStorage.setItem("current-form-value", JSON.stringify(""))
+        location.reload()
+    });
 
 };

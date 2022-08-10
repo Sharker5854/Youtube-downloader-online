@@ -15,7 +15,7 @@
     <body>
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" id="logo" href="/">
                     <img src="https://i.pinimg.com/originals/de/1c/91/de1c91788be0d791135736995109272a.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
                     YouTube Installer
                 </a>
@@ -24,12 +24,15 @@
 
         <div class="main">
             <div class="form-area">
-                <!-- <form action="{{ install_video_url }}" method="POST" id="yt-form"> --> <!-- without 'action' attr cause we'll call ajax-query when submit form -->
-                    <div class="inputs-area">
-                        <input type="text" class="form-control" id="url-input" placeholder="Ссылка на видео...">
-                        <input type="submit" class="btn btn-success" id="submit-input" value="Скачать" disabled>
-                    </div>
-                </form>
+                <div class="inputs-area">
+                    <input type="text" class="form-control" id="url-input" placeholder="Ссылка на видео...">
+                    <input type="submit" class="btn btn-success" id="submit-input" value="Скачать" disabled>
+                </div>
+            </div>
+
+            <div class="spinner-area">
+                <p id="spinner-text">Загружаем видео на сервер...</p>
+                <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"></div>
             </div>
 
             <div class="found-video-data">

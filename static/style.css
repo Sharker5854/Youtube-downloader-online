@@ -38,6 +38,16 @@ a {
     margin-left: 0.5%;
 }
 
+.spinner-area {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+}
+#spinner-text {
+    font-size: 17px;
+    color: #FFFFFF;
+}
+
 .found-video-data {
     margin-top: 50px;
     text-align: center;
